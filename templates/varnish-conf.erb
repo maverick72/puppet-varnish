@@ -98,7 +98,7 @@ VARNISH_SECRET_FILE=<%= scope.lookupvar('varnish_secret_file') %>
 # # Backend storage specification
 <% if scope.lookupvar('storage_type') == 'malloc' %>
 <% if @varnish_storage_transient_size %>
-VARNISH_STORAGE_TRANSIENT="<%= scope.lookupvar('storage_type') %>,${VARNISH_STORAGE_TRANSIENT_SIZE}"
+VARNISH_STORAGE_TRANSIENT="Transient=<%= scope.lookupvar('storage_type') %>,${VARNISH_STORAGE_TRANSIENT_SIZE}"
 <% end -%>
 VARNISH_STORAGE="<%= scope.lookupvar('storage_type') %>,${VARNISH_STORAGE_SIZE}"
 <% else %>
