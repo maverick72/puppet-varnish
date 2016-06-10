@@ -73,7 +73,7 @@ VARNISH_THREAD_DELAY=<%= scope.lookupvar('varnish_thread_delay') %>
 VARNISH_THREAD_POOLS=<%= scope.lookupvar('varnish_thread_pools') %>
 <% end -%>
 #
-<% if @varnish_send_timout -%>
+<% if @varnish_send_timeout -%>
 # # Send timeout for client connections
 VARNISH_SEND_TIMEOUT=<%= scope.lookupvar('varnish_send_timeout') %>
 <% end -%>
@@ -89,7 +89,7 @@ VARNISH_STORAGE_SIZE=<%= scope.lookupvar('varnish_storage_size') %>
 #
 # # Transient cache file size: in bytes, optionally using k / M / G / T suffix,
 # # or in percentage of available disk space using the % suffix.
-VARNISH_STORAGE_TRANSIENT_SIZE=<%= scope.lookupvar('varnish_storage_transient_size') %>
+VARNISH_STORAGE_TRANSIENT_SIZE=Transient=<%= scope.lookupvar('varnish_storage_transient_size') %>
 #
 <% end -%>
 # # File containing administration secret
