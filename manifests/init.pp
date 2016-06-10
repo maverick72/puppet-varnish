@@ -61,6 +61,7 @@ class varnish (
   $varnish_thread_delay           = undef,
   $varnish_thread_pools           = undef,
   $varnish_thread_timeout         = '300',
+  $varnish_send_timeout           = undef,
   $varnish_storage_size           = '1G',
   $varnish_storage_transient_size = undef,
   $varnish_secret_file            = '/etc/varnish/secret',
