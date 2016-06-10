@@ -65,7 +65,17 @@ VARNISH_THREAD_TIMEOUT=<%= scope.lookupvar('varnish_thread_timeout') %>
 #
 <% if @varnish_thread_delay -%>
 # # Thread pool add delay
-VARNISH_THREAD_POOL_ADD_DELAY=<%= scope.lookup('varnish_thread_delay') %>
+VARNISH_THREAD_DELAY=<%= scope.lookup('varnish_thread_delay') %>
+<% end -%>
+#
+<% if @varnish_thread_pools -%>
+# # Number of worker thread pools.
+VARNISH_THREAD_POOLS=<%= scope.lookup('varnish_thread_pools') %>
+<% end -%>
+#
+<% if @varnish_send_timout -%>
+# # Send timeout for client connections
+VARNISH_SEND_TIMEOUT=<%= scope.lookup('varnish_send_timeout') %>
 <% end -%>
 #
 # # Cache file location
@@ -93,7 +103,7 @@ VARNISH_STORAGE_TRANSIENT="<%= scope.lookupvar('storage_type') %>,${VARNISH_STOR
 VARNISH_STORAGE="<%= scope.lookupvar('storage_type') %>,${VARNISH_STORAGE_SIZE}"
 <% else %>
 VARNISH_STORAGE="<%= scope.lookupvar('storage_type') %>,${VARNISH_STORAGE_FILE},${VARNISH_STORAGE_SIZE}"
-<% end %>
+<% end -%>
 
 #
 # # Default TTL used when the backend does not specify one
@@ -109,7 +119,8 @@ DAEMON_OPTS="-a <%= scope.lookupvar('varnish_listen_address') %>:<%= scope.looku
              -S <%= scope.lookupvar('varnish_secret_file') %> \
 <% if scope.lookupvar('storage_type') == 'malloc' -%>
 <% if @varnish_storage_transient_size -%>
-             -s 
+             -s Transient=<%= scope.lookupvar('storage_type') %>,<%= scope.lookupvar('varnish_storage_transient_size') %> \ 
+<% end -%>
              -s <%= scope.lookupvar('storage_type') %>,<%= scope.lookupvar('varnish_storage_size') %> \
 <% else -%>
              -s <%= scope.lookupvar('storage_type') %>,<%= scope.lookupvar('varnish_storage_file') %>,<%= scope.lookupvar('varnish_storage_size') %> \
@@ -118,6 +129,15 @@ DAEMON_OPTS="-a <%= scope.lookupvar('varnish_listen_address') %>:<%= scope.looku
              -p vcl_dir=<%= @vcl_dir %> \
 <% end -%>
 <% if scope.lookupvar('varnish::params::version').to_i == 4 -%>
+<% if @varnish_thread_pools -%>
+             -p thread_pools=<%= scope.lookupvar('varnish_thread_pools') %> \
+<% end -%>
+<% if @varnish_thread_delay -%>
+             -p thread_pool_add_delay=<%= scope.lookupvar('varnish_thread_delay') %> \
+<% end -%>
+<% if @varnish_send_timeout -%>
+             -p send_timeout=<%= scope.lookupvar('varnish_send_timeout') %> \
+<% end -%>
              -p thread_pool_min=<%= scope.lookupvar('varnish_min_threads') %> \
              -p thread_pool_max=<%= scope.lookupvar('varnish_max_threads') %> \
              -p thread_pool_timeout=<%= scope.lookupvar('varnish_thread_timeout') %>"
