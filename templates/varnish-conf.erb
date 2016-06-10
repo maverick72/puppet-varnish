@@ -65,17 +65,17 @@ VARNISH_THREAD_TIMEOUT=<%= scope.lookupvar('varnish_thread_timeout') %>
 #
 <% if @varnish_thread_delay -%>
 # # Thread pool add delay
-VARNISH_THREAD_DELAY=<%= scope.lookup('varnish_thread_delay') %>
+VARNISH_THREAD_DELAY=<%= scope.lookupvar('varnish_thread_delay') %>
 <% end -%>
 #
 <% if @varnish_thread_pools -%>
 # # Number of worker thread pools.
-VARNISH_THREAD_POOLS=<%= scope.lookup('varnish_thread_pools') %>
+VARNISH_THREAD_POOLS=<%= scope.lookupvar('varnish_thread_pools') %>
 <% end -%>
 #
 <% if @varnish_send_timout -%>
 # # Send timeout for client connections
-VARNISH_SEND_TIMEOUT=<%= scope.lookup('varnish_send_timeout') %>
+VARNISH_SEND_TIMEOUT=<%= scope.lookupvar('varnish_send_timeout') %>
 <% end -%>
 #
 # # Cache file location
